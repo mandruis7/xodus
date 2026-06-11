@@ -4,10 +4,8 @@ use tokio::{
 };
 use zerocopy::transmute;
 
-use crate::{
-    models::xvd::{
-        XvcInfo, XvcRegionHeader, XvcRegionSpecifier, XvdHeader, XvdUpdateSegment,
-    },
+use crate::models::xvd::{
+    XvcInfo, XvcRegionHeader, XvcRegionSpecifier, XvdHeader, XvdUpdateSegment,
 };
 
 pub async fn parse_file(path: String) -> Result<(), Box<dyn std::error::Error>> {

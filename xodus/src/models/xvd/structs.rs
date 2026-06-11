@@ -2,8 +2,8 @@ use zerocopy::FromBytes;
 
 use crate::{
     models::xvd::{
-        constants::{LEGACY_SECTOR_SIZE, SECTOR_SIZE, XVD_HEADER_INCL_SIGNATURE_SIZE},
         XvdVolumeFlags,
+        constants::{LEGACY_SECTOR_SIZE, SECTOR_SIZE, XVD_HEADER_INCL_SIGNATURE_SIZE},
     },
     xvd::math::{bytes_to_pages, calculate_number_of_hash_pages, page_number_to_offset},
 };
@@ -145,7 +145,8 @@ impl XvdHeader {
     }
 
     pub fn xvc_info_offset(&self, hash_tree_page_count: u64) -> u64 {
-        page_number_to_offset(self.user_data_page_count()) + self.user_data_offset(hash_tree_page_count)
+        page_number_to_offset(self.user_data_page_count())
+            + self.user_data_offset(hash_tree_page_count)
     }
 }
 
@@ -186,7 +187,7 @@ pub struct XvcInfo {
 #[repr(C, packed)]
 pub struct XvdUpdateSegment {
     pub page_num: u32,
-    pub hash: u64
+    pub hash: u64,
 }
 
 #[derive(FromBytes)]
@@ -194,8 +195,8 @@ pub struct XvdUpdateSegment {
 pub struct XvcRegionSpecifier {
     pub region_id: u32,
     pub padding4: u32,
-    pub key: [u8; 0x80], // UTF-16
-    pub value: [u8; 0x100] // UTF-16
+    pub key: [u8; 0x80],    // UTF-16
+    pub value: [u8; 0x100], // UTF-16
 }
 
 #[derive(FromBytes)]
